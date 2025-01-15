@@ -1,35 +1,76 @@
+//https://www.acmicpc.net/problem/1406 진행중
+
 package test;
 
 import java.util.Scanner;
 
+class ListNode {
+    char value;
+    ListNode next;
+    ListNode prev;
+    ListNode(char value) {
+        this.value = value;
+        next = null;
+        prev = null;
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
+        String str = input.next();
         int n = input.nextInt();
-        int s = input.nextInt();
-        int[] arr = new int[n];
 
-        for (int i = 0; i < n; i++) {
-            arr[i] = input.nextInt();
+        ListNode strHead = new ListNode(str.charAt(0));
+        ListNode current = strHead;
+        ListNode prev;
+        ListNode cursor;
+
+        // 입력받은 문자열을 char로 리스트노드로 연결시킴
+        for(int i=1; i<str.length(); i++) {
+            prev = current;
+            current.next = new ListNode(str.charAt(i));
+            current = current.next;
+            current.prev = prev;
         }
 
-        int minLength = n + 1; // 최소 길이 초기값을 n+1로 설정
-        int left = 0, sum = 0;
-
-        for (int right = 0; right < n; right++) {
-            sum += arr[right]; // 오른쪽 포인터 확장
-
-            // 현재 부분합이 S 이상인 동안 최소 길이를 갱신하고 왼쪽 포인터 이동
-            while (sum >= s) {
-                minLength = Math.min(minLength, right - left + 1);
-                sum -= arr[left];
-                left++;
+        cursor = current;   //가장 마지막 노드를 가리킴
+        
+        // n번 command 입력
+        for(int i=0; i<n; i++) {
+            char command = input.next().charAt(0);
+            if(command == 'L') {
+                if(cursor.prev!=null)
+                    cursor = cursor.prev;
+                System.out.println(cursor.value);
+            }
+            else if(command =='D') {
+                if(cursor.next!=null)
+                    cursor = cursor.next;
+                System.out.println(cursor.value);
+            }  
+            //커서 왼쪽 문자 = 커서의 value
+            else if(command =='B') {
+                if(cursor.prev!=null) {
+                    cursor.prev.next = cursor.next;
+                    cursor = cursor.prev;
+                }  
+            }
+            //미완성
+            else if(command == 'P') {
+                char c = input.next().charAt(0);
+                cursor.next = new ListNode(c);
             }
         }
 
-        // 결과 출력: 유효한 부분합이 없으면 0 출력
-        System.out.println(minLength == n + 1 ? 0 : minLength);
+
+
+        //출력
+        current = strHead;
+        while(current!=null) {
+            System.out.print(current.value);
+            current = current.next;
+        }
 
         input.close();
     }
