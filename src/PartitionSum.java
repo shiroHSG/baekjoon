@@ -30,5 +30,6 @@ public class PartitionSum {
         System.out.println(minLength == n + 1 ? 0 : minLength);
 
         input.close();
+
     }
 }
