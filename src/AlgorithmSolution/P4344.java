@@ -1,16 +1,11 @@
 package AlgorithmSolution;
 
-import java.io.File;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 public class P4344 {
-    public static void main(String[] args) throws FileNotFoundException {
-        //Scanner input = new Scanner(System.in);
-
-        Scanner input = new Scanner(new File("test.txt"));
-        
+    public static void main(String[] args) {
+        //Scanner input = new Scanner(new File("test.txt"));
+        Scanner input = new Scanner(System.in);  
         int c = input.nextInt();
         double[] ratio = new double[c];
 
