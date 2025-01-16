@@ -25,7 +25,6 @@ public class P8958 {
             }
             System.out.println(sum[i]);
         }
-
         input.close();
     }
 }
