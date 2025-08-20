@@ -19,6 +19,7 @@ public class P10989 {
 
         for(int i=0; i<countArr.length; i++) {
             while(countArr[i]-->0) {
+                System.out.println(i);
                 sb.append(i).append('\n');
             }
         }
